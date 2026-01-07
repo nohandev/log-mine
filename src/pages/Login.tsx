@@ -1,7 +1,7 @@
 import Header from '@/components/Header'
 import Main from '@/components/Main'
 
-const App = () => {
+const Login = () => {
   return (
     <div className='bg-[linear-gradient(to_bottom,#121212_0%,#12121299_33%,#12121200_66%,#121212_100%),url(/background.png)] h-screen bg-center object-cover'>
       <Header/>
@@ -10,4 +10,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Login
