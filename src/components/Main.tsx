@@ -1,4 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Eye, EyeClosed } from 'lucide-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -27,6 +29,9 @@ const LoginSchema = z.object({
 type LoginSchemaValues = z.infer<typeof LoginSchema>
 
 const Main = () => {
+
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+
   const { register, handleSubmit, formState: {errors, isValid}, reset} = useForm<LoginSchemaValues>({
     mode: 'onSubmit',    
     resolver: zodResolver(LoginSchema),
@@ -84,14 +89,21 @@ const Main = () => {
               Senha
             </label>
           </div>
-          <div>
+          <div className='relative'>
             <input 
-              {...register('password')}
-              id='password'
-              name='password'
-              placeholder='Insira sua senha'
-              type='text'
-              className='bg-dark-10 px-4 py-3 w-full rounded-sm font-inter text-sm border outline-none border-dark-20 text-dark-40 focus:border-dark-30'/>
+            {...register('password')}
+            id='password'
+            name='password'
+            placeholder='Insira sua senha'
+            type={showPassword ? 'text' : 'password'}
+            className='bg-dark-10 px-4 py-3 w-full rounded-sm font-inter text-sm border outline-none border-dark-20 text-dark-40 focus:border-dark-30'/>
+
+            <button 
+            type='button'
+            className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-dark-40 hover:text-primary'
+            onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <Eye size={18}/> : <EyeClosed size={18}/>}
+            </button>
           </div>
 
           {errors.password?.message ? <span className='text-center text-sm font-inter text-danger font-medium'>{errors.password.message}</span> : <span className='text-transparent font-medium font-inter text-sm'>a</span>}
@@ -109,20 +121,11 @@ const Main = () => {
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
-            strokeWidth='3'
-          >
+            strokeWidth='3'>
             <polyline points='20 6 9 17 4 12' />
           </svg>
 
-          <div className='
-            w-4 h-4 rounded-sm border border-dark-30
-            bg-dark-20
-            peer-checked:bg-primary
-            peer-checked:border-primary
-            flex items-center justify-center
-            
-          '>
-            
+          <div className='w-4 h-4 rounded-sm border border-dark-30 bg-dark-20 peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center'>
           </div>
 
           <span className='font-inter text-dark-40 text-xs'>
@@ -132,8 +135,8 @@ const Main = () => {
 
         <div className='pt-14'>
           <button 
-          type='submit' 
-          className='w-full py-3 cursor-pointer text-dark-40 bg-primary font-kufam font-semibold rounded-md'>
+            type='submit' 
+            className='w-full py-3 cursor-pointer text-dark-40 bg-primary font-kufam font-semibold rounded-md'>
             Entrar na conta
           </button>
         </div>
