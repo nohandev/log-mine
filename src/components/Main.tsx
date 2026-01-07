@@ -53,7 +53,7 @@ const Main = () => {
     <main className='flex items-center justify-center w-full px-6'>
       <form 
         onSubmit={handleSubmit(onSubmit)}
-        className='bg-dark-10/80 w-full max-w-96 mt-4 gap-4 flex flex-col rounded-xl border border-dark-30/50 px-8 py-6'>
+        className='bg-dark-10/80 w-full max-w-96 mt-24 lg:mt-4 gap-4 flex flex-col rounded-xl border border-dark-30/50 px-8 py-6'>
         <div>
           <img
             src='/logo-solo.svg'
