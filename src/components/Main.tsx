@@ -1,38 +1,28 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Eye, EyeClosed } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-
-
-const LoginSchema = z.object({
-  email: z
-    .string()
-    .trim()
-    .toLowerCase()
-    .email('Insira um endereço de e-mail válido')
-    .min(5, 'O e-mail deve ter pelo menos 5 caracteres'),
-  
-  password: z
-    .string()
-    .min(8, 'A senha deve ter no mínimo 8 caracteres')
-    .max(100, 'A senha é muito longa'),
-    // .regex(/[A-Z]/, 'A senha deve conter pelo menos uma letra maiúscula')
-    // .regex(/[a-z]/, 'A senha deve conter pelo menos uma letra minúscula')
-    // .regex(/[0-9]/, 'A senha deve conter pelo menos um número')
-    // .regex(/[^A-Za-z0-9]/, 'A senha deve conter pelo menos um caractere especial'),
-
-  rememberPassword: z
-    .boolean()
-})
-
-type LoginSchemaValues = z.infer<typeof LoginSchema>
+import useShowRedirectModal from '@/store/showRedrectModal.store'
+import { type LoginSchemaValues, LoginSchema } from '@/types/types'
+import { useNavigate } from 'react-router-dom'
 
 const Main = () => {
+  const navigate = useNavigate()
+  const { showRedirectModal, setShowRedirectModal } = useShowRedirectModal()
+
+  useEffect(() => {
+    if (!showRedirectModal ) return
+
+    setTimeout(() => {
+      navigate('/thanks')
+      setShowRedirectModal()
+    }, 3000)
+
+  }, [showRedirectModal])
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
-  const { register, handleSubmit, formState: {errors, isValid}, reset} = useForm<LoginSchemaValues>({
+  const { register, handleSubmit, formState: {errors}, reset} = useForm<LoginSchemaValues>({
     mode: 'onSubmit',    
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -42,11 +32,9 @@ const Main = () => {
     }
   })
 
-  
-  const onSubmit = (data: LoginSchemaValues) => {
-    console.log(isValid)
-    console.log(data)
+  const onSubmit = () => {
     reset()
+    setShowRedirectModal()
   }
 
   return (
@@ -133,13 +121,17 @@ const Main = () => {
           </span>
         </label>
 
-        <div className='pt-14'>
+        <div className='pt-4'>
           <button 
             type='submit' 
             className='w-full py-3 cursor-pointer text-dark-40 bg-primary font-kufam font-semibold rounded-md'>
             Entrar na conta
           </button>
         </div>
+
+        <p className='font-inter font-medium text-primary cursor-pointer text-center hover:underline'>
+          Esqueceu a senha?
+        </p>
       </form>
     </main>
   )
