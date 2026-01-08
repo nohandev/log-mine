@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import useShowRedirectModal from '@/store/showRedrectModal.store'
 import { type LoginSchemaValues, LoginSchema } from '@/types/types'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'motion/react'
 
 const Main = () => {
   const navigate = useNavigate()
@@ -39,7 +40,7 @@ const Main = () => {
 
   return (
     <main className='flex items-center justify-center w-full px-6'>
-      <form 
+      <motion.form 
         onSubmit={handleSubmit(onSubmit)}
         className='bg-dark-10/80 w-full max-w-96 mt-24 lg:mt-4 gap-4 flex flex-col rounded-xl border border-dark-30/50 px-8 py-6'>
         <div>
@@ -132,7 +133,7 @@ const Main = () => {
         <p className='font-inter font-medium text-primary cursor-pointer text-center hover:underline'>
           Esqueceu a senha?
         </p>
-      </form>
+      </motion.form>
     </main>
   )
 }
