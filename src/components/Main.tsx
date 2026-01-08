@@ -40,11 +40,29 @@ const Main = () => {
 
   return (
     <main className='flex items-center justify-center w-full px-6'>
-      <motion.form 
+      <motion.form
+        initial={{
+          scale: 0
+        }}
+        animate={{
+          scale: 1
+        }} 
+        transition={{
+          delay: 1.9,
+          ease: [0.34, 1.56, 0.64, 1],
+          duration: 0.4
+        }}
         onSubmit={handleSubmit(onSubmit)}
         className='bg-dark-10/80 w-full max-w-96 mt-24 lg:mt-4 gap-4 flex flex-col rounded-xl border border-dark-30/50 px-8 py-6'>
         <div>
-          <img
+          <motion.img
+          whileHover={{
+            scale: 1.2,
+            transition:{
+              duration: 0.4,
+              ease: [0.2, 0.8, 0.4, 1]
+            },
+          }}
             src='/logo-solo.svg'
             alt='Logo MineLog'
             className='w-full max-w-8 h-auto mx-auto'/>
@@ -64,7 +82,7 @@ const Main = () => {
               id='email'
               placeholder='Insira seu e-mail'
               type='text'
-              className='bg-dark-10 px-4 py-3 w-full rounded-sm font-inter text-sm border outline-none border-dark-20 text-dark-40 focus:border-dark-30'/>
+              className='bg-dark-10 px-4 py-3 w-full rounded-sm font-inter text-sm border outline-none border-dark-20 text-dark-40 transition-colors hover:border-dark-30 focus:border-dark-30'/>
           </div>
           {/* gambiarra pra não comprometer a ui, favor não modificar xD */}
           {errors.email?.message ? <span className='text-center text-sm font-inter text-danger font-medium'>{errors.email.message}</span> : <span className='text-transparent font-medium font-inter text-sm'>a</span>}
@@ -85,7 +103,7 @@ const Main = () => {
             name='password'
             placeholder='Insira sua senha'
             type={showPassword ? 'text' : 'password'}
-            className='bg-dark-10 px-4 py-3 w-full rounded-sm font-inter text-sm border outline-none border-dark-20 text-dark-40 focus:border-dark-30'/>
+            className='bg-dark-10 px-4 py-3 w-full rounded-sm font-inter text-sm border outline-none border-dark-20 text-dark-40 transition-colors hover:border-dark-30 focus:border-dark-30'/>
 
             <button 
             type='button'
@@ -117,17 +135,27 @@ const Main = () => {
           <div className='w-4 h-4 rounded-sm border border-dark-30 bg-dark-20 peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center'>
           </div>
 
-          <span className='font-inter text-dark-40 text-xs'>
+          <span className='font-inter text-dark-40 text-xs transition-colors hover:text-primary'>
             Lembrar minha senha
           </span>
         </label>
 
         <div className='pt-4'>
-          <button 
-            type='submit' 
-            className='w-full py-3 cursor-pointer text-dark-40 bg-primary font-kufam font-semibold rounded-md'>
+          <motion.button
+          whileHover={{
+          scale: 1.1,
+          transition: {
+            duration: 0.3,
+            ease: [0, 0.55, 0.45, 1]
+          }
+          }}
+          whileTap={{
+            scale: 0.9
+          }} 
+          type='submit' 
+          className='w-full py-3 cursor-pointer text-dark-40 bg-primary font-kufam font-semibold rounded-md'>
             Entrar na conta
-          </button>
+          </motion.button>
         </div>
 
         <p className='font-inter font-medium text-primary cursor-pointer text-center hover:underline'>
