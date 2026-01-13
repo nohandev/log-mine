@@ -53,7 +53,7 @@ const Main = () => {
           duration: 0.4
         }}
         onSubmit={handleSubmit(onSubmit)}
-        className='bg-dark-10/80 w-full max-w-96 mt-24 lg:mt-4 gap-4 flex flex-col rounded-xl border border-dark-30/50 px-8 py-6'>
+        className='bg-dark-10/80 w-full max-w-96 mt-24 lg:mt-4 rounded-xl border border-dark-30/50 px-8 py-6'>
         <div>
           <motion.img
           whileHover={{
@@ -116,7 +116,8 @@ const Main = () => {
           {errors.password?.message ? <span className='text-center text-sm font-inter text-danger font-medium'>{errors.password.message}</span> : <span className='text-transparent font-medium font-inter text-sm'>a</span>}
         </div>
 
-        <label className='flex items-center gap-2 cursor-pointer relative'>
+        <div className='flex mt-4'>
+          <label className='flex items-center gap-2 cursor-pointer relative'>
           <input
             {...register('rememberPassword')}
             type='checkbox'
@@ -139,8 +140,9 @@ const Main = () => {
             Lembrar minha senha
           </span>
         </label>
+        </div>
 
-        <div className='pt-4'>
+        <div className='mt-6'>
           <motion.button
           whileHover={{
           scale: 1.1,
@@ -158,9 +160,11 @@ const Main = () => {
           </motion.button>
         </div>
 
-        <p className='font-inter font-medium text-primary cursor-pointer text-center hover:underline'>
-          Esqueceu a senha?
-        </p>
+        <div className='mt-6 text-center'>
+          <span className='font-inter font-medium text-primary cursor-pointer hover:underline hover:text-shadow-glow'>
+            Esqueceu a senha?
+          </span>
+        </div>
       </motion.form>
     </main>
   )
