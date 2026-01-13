@@ -38,7 +38,7 @@ const floatAnimation = (index: number): TargetAndTransition => ({
 })
 
   return (
-    <footer className='flex flex-col items-center justify-center mt-14 lg:mt-0'>
+    <footer className='flex flex-col items-center justify-center mt-0 lg:mt-14'>
       <motion.div 
       variants={containerVariants}
       initial='hidden'
@@ -68,7 +68,7 @@ const floatAnimation = (index: number): TargetAndTransition => ({
         ))}
       </motion.div>
 
-      <div className='pb-6'>
+      <div className='pb-6 lg:py-6'>
         <div className='flex gap-2 font-inter w-full justify-center'>
           <p className='text-dark-40/80'>Desenvolvido por:</p>
           <a 
